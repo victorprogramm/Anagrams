@@ -5,7 +5,11 @@
 // because "cars" and "arcs" form 1 anagram and "so" and "os" form a 2nd anagram.
 // The word "are" occurs twice in the string but it isn't an anagram because it is the same word just repeated.
 // The string will contain only spaces and lowercase letters, no punctuation, numbers, or uppercase letters.
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Anagrams {
@@ -16,20 +20,17 @@ public class Anagrams {
         String[] words = text.split(" ");
 
         Set<String> specialWords = new HashSet<>(Arrays.asList(words));
-        for (String i : words) {
-            specialWords.add(i);
-        }
 
         Set<String> specialWordsSort = specialWords.stream()
-                .map(item -> stringSort(item))
+                .map(Anagrams::stringSort)
                 .collect(Collectors.toSet());
-        Integer numberOfAnagrams = specialWords.size() - specialWordsSort.size();
+        int numberOfAnagrams = specialWords.size() - specialWordsSort.size();
 
         System.out.print("\nNumber of anagrams: " + numberOfAnagrams);
     }
 
     public static String stringSort(String enterSentence) {
-        char wordSort[] = enterSentence.toCharArray();
+        char [] wordSort = enterSentence.toCharArray();
         Arrays.sort(wordSort);
 
         return new String(wordSort);
